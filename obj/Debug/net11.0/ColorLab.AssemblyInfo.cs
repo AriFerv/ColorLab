@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ColorLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8cc5b81dfd28fb687c768d6d3687bcb3ef7456da")]
 [assembly: System.Reflection.AssemblyProductAttribute("ColorLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ColorLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
