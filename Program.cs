@@ -1,7 +1,24 @@
-﻿Color color = new Color(52, 152, 219, 255);
+﻿using Raylib_cs;
+namespace ColorLab;
 
-string hex = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-// 52  -> 34
-// 152 -> 98
-// 219 -> DB
-// Resultado: #3498DB
+internal static class Programa
+{
+    public static void Main()
+    {
+        const int anchoVentana = 800;
+        const int altoVentana = 600;
+
+        Raylib.InitWindow(anchoVentana, altoVentana, "Pixel Lab 16x16");
+        Raylib.SetTargetFPS(60);
+
+        while (!Raylib.WindowShouldClose())
+        {
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.White);
+            //aqui se dibuja equisde
+            Raylib.EndDrawing();
+        }
+
+        Raylib.CloseWindow();
+    }
+}
