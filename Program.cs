@@ -20,25 +20,34 @@ internal static class Programa
             Vector2 mouse = Raylib.GetMousePosition();
 
             int y = 20;
+            int anchoTarjeta = 260;
+            int altoTarjeta = 60;
+
             for (int i = 0; i < paleta.Length; i++)
             {
                 var c = paleta[i];
                 Color colorRaylib = new Color(c.R, c.G, c.B, (byte)255);
-                Rectangle fila = new Rectangle(10, y - 5, 400, 50);
+                Rectangle tarjeta = new Rectangle(10, y, anchoTarjeta, altoTarjeta);
 
-                Raylib.DrawRectangle(20, y, 40, 40, colorRaylib);
-                string info = $"{c.Nombre}  RGB({c.R},{c.G},{c.B})  {ColorAHex(colorRaylib)}";
-                Raylib.DrawText(info, 70, y + 10, 18, Color.Black);
+                bool esSeleccionado = i == indiceSeleccionado;
 
-                if (Raylib.CheckCollisionPointRec(mouse, fila) && Raylib.IsMouseButtonPressed(MouseButton.Left))
+                Raylib.DrawRectangleRec(tarjeta, esSeleccionado? new Color((byte)210, (byte)230, (byte)250, (byte)255): Color.White);
+                Raylib.DrawRectangleLinesEx(tarjeta, esSeleccionado ? 2 : 1, esSeleccionado ? Color.Blue : Color.LightGray);
+
+                Raylib.DrawRectangle((int)tarjeta.X + 10, (int)tarjeta.Y + 10, 40, 40, colorRaylib);
+                Raylib.DrawText(c.Nombre, (int)tarjeta.X + 60, (int)tarjeta.Y + 8, 16, Color.Black);
+
+                string info = $"RGB({c.R},{c.G},{c.B})  {ColorAHex(colorRaylib)}";
+                Raylib.DrawText(info, (int)tarjeta.X + 60, (int)tarjeta.Y + 30, 13, Color.DarkGray);
+
+                if (Raylib.CheckCollisionPointRec(mouse, tarjeta) && Raylib.IsMouseButtonPressed(MouseButton.Left))
                 {
                     indiceSeleccionado = i;
                 }
 
-                y += 55;
+                y += altoTarjeta + 8;
             }
 
-            // Lienzo para pintar
             Raylib.DrawRectangle((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, colorPintado);
             Raylib.DrawRectangleLines((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, Color.Black);
 
