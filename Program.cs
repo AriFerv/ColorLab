@@ -29,7 +29,8 @@ internal static class Programa
                 Color colorRaylib = new Color(c.R, c.G, c.B, (byte)255);
                 Rectangle tarjeta = new Rectangle(10, y, anchoTarjeta, altoTarjeta);
 
-                bool esSeleccionado = i == indiceSeleccionado;
+                bool esSeleccionado = i == indiceColorA;
+                bool esColorB = i == indiceColorB;
 
                 Raylib.DrawRectangleRec(tarjeta, esSeleccionado? new Color((byte)210, (byte)230, (byte)250, (byte)255): Color.White);
                 Raylib.DrawRectangleLinesEx(tarjeta, esSeleccionado ? 2 : 1, esSeleccionado ? Color.Blue : Color.LightGray);
@@ -42,18 +43,54 @@ internal static class Programa
 
                 if (Raylib.CheckCollisionPointRec(mouse, tarjeta) && Raylib.IsMouseButtonPressed(MouseButton.Left))
                 {
-                    indiceSeleccionado = i;
+                    indiceColorA = i;
+                }
+
+                if (Raylib.CheckCollisionPointRec(mouse, tarjeta) && Raylib.IsMouseButtonPressed(MouseButton.Right))
+                {
+                    if (i != indiceColorA) {indiceColorB = i;}
                 }
 
                 y += altoTarjeta + 8;
+
+                if (esSeleccionado)
+                {
+                    Raylib.DrawText("A", (int)tarjeta.X + (int)tarjeta.Width - 20, (int)tarjeta.Y + 5, 18, Color.Blue);
+                }
+
+                if (esColorB)
+                {
+                    Raylib.DrawText("B", (int)tarjeta.X + (int)tarjeta.Width - 20, (int)tarjeta.Y + (int)tarjeta.Height - 25, 18, Color.Maroon);
+                }
             }
+
+            var colorA = paleta[indiceColorA];
+            var colorB = paleta[indiceColorB];
+
+            int n = 8;
+            int anchoMuestra = (int)(lienzo.Width / n);
+            int xBase = (int)lienzo.X;
+            int yMuestra = (int)(lienzo.Y + lienzo.Height + 40);
+
+            for (int i = 0; i <= 7; i++) {
+                double t = i/(double)(n-1);
+                    //componente =    inicio + (fin - inicio) * t
+                byte rMuestra = (byte)(colorA.R + (colorB.R - colorA.R) * t);
+                byte gMuestra = (byte)(colorA.G + (colorB.G - colorA.G) * t);
+                byte bMuestra = (byte)(colorA.B + (colorB.B - colorA.B) * t);
+                Color colorMuestra = new Color(rMuestra, gMuestra, bMuestra, (byte)255);
+
+                int xMuestra = xBase + i * anchoMuestra;
+                Raylib.DrawRectangle(xMuestra, yMuestra, anchoMuestra - 4, 50, colorMuestra);
+                Raylib.DrawText($"{t:0.00}", xMuestra, yMuestra + 55, 14, Color.Black);
+                }
 
             Raylib.DrawRectangle((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, colorPintado);
             Raylib.DrawRectangleLines((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, Color.Black);
 
             if (Raylib.CheckCollisionPointRec(mouse, lienzo) && Raylib.IsMouseButtonPressed(MouseButton.Left))
             {
-                var seleccionado = paleta[indiceSeleccionado];
+                var seleccionado = paleta[indiceColorA];
                 colorPintado = new Color(seleccionado.R, seleccionado.G, seleccionado.B, (byte)255);
             }
 
@@ -68,9 +105,10 @@ internal static class Programa
         Raylib.CloseWindow();
     }
     
-    static int indiceSeleccionado = 0;
+    static int indiceColorA = 0;
+    static int indiceColorB = 1;
     static Color colorPintado = Color.White;
-    static Rectangle lienzo = new Rectangle(450, 20, 350, 350);
+    static Rectangle lienzo = new Rectangle(300, 20, 528, 400);
 
     struct ColorPaleta
     {
