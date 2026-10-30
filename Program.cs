@@ -83,6 +83,7 @@ internal static class Programa
                 int xMuestra = xBase + i * anchoMuestra;
                 Raylib.DrawRectangle(xMuestra, yMuestra, anchoMuestra - 4, 50, colorMuestra);
                 Raylib.DrawText($"{t:0.00}", xMuestra, yMuestra + 55, 14, Color.Black);
+                Raylib.DrawText($"{rMuestra},{gMuestra},{bMuestra}", xMuestra, yMuestra + 72, 11, Color.DarkGray);
                 }
 
             Raylib.DrawRectangle((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, colorPintado);
@@ -98,6 +99,23 @@ internal static class Programa
             {
                 colorPintado = Color.White;
             }
+
+            byte alphaValor = 120;
+            Color colorSemitransparente = new Color(colorA.R, colorA.G, colorA.B, alphaValor);
+
+            Rectangle fondoBlanco = new Rectangle(10, 400, 130, 100);
+            Rectangle fondoOscuro = new Rectangle(150, 400, 130, 100);
+
+            Raylib.DrawRectangleRec(fondoBlanco, Color.White);
+            Raylib.DrawRectangleLinesEx(fondoBlanco, 1, Color.LightGray);
+            Raylib.DrawRectangleRec(fondoOscuro, Color.Black);
+
+            Raylib.DrawRectangle((int)fondoBlanco.X + 20, (int)fondoBlanco.Y + 20, 90, 60, colorSemitransparente);
+            Raylib.DrawRectangle((int)fondoOscuro.X + 20, (int)fondoOscuro.Y + 20, 90, 60, colorSemitransparente);
+
+            Raylib.DrawText($"Alpha {alphaValor} sobre dos fondos", 10, 375, 14, Color.Black);
+            Raylib.DrawText("Fondo blanco", 10, 505, 14, Color.DarkGray);
+            Raylib.DrawText("Fondo oscuro", 150, 505, 14, Color.DarkGray);
 
             Raylib.EndDrawing();
         }
