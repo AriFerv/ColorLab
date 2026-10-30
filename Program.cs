@@ -83,7 +83,7 @@ internal static class Programa
                 int xMuestra = xBase + i * anchoMuestra;
                 Raylib.DrawRectangle(xMuestra, yMuestra, anchoMuestra - 4, 50, colorMuestra);
                 Raylib.DrawText($"{t:0.00}", xMuestra, yMuestra + 55, 14, Color.Black);
-                Raylib.DrawText($"{rMuestra},{gMuestra},{bMuestra}", xMuestra, yMuestra + 72, 11, Color.DarkGray);
+                Raylib.DrawText($"{rMuestra},{gMuestra},{bMuestra}", xMuestra, yMuestra + 72, 9, Color.DarkGray);
                 }
 
             Raylib.DrawRectangle((int)lienzo.X, (int)lienzo.Y, (int)lienzo.Width, (int)lienzo.Height, colorPintado);
