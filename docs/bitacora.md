@@ -37,6 +37,9 @@ Se agregó debajo de cada valor de t el RGB de esa muestra, calculado con la int
 Paso 12: Alpha 120 sobre dos fondos
 Se dibujaron un fondo blanco y uno oscuro, y encima de cada uno un cuadro más pequeño con el color A con alpha 120.
 
+Paso 13: Instrucciones del programa
+Se colocaron las instrucciones sobre como usar el programa bajo las tarjetas de los colores, asi el programa ahora es utilizable para cualquier persona.
+
 ## Errores y Correccines: Sesión 03 · Color Lab
 - Objetivo del cambio: elegir el color B con clic derecho sin que sea igual a A, y generar los 8 pasos del degradado.
 - Comando o prueba ejecutada: revisión del código antes de correr dotnet run.
