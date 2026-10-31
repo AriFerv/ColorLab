@@ -54,3 +54,17 @@ Se dibujaron un fondo blanco y uno oscuro, y encima de cada uno un cuadro más p
   - En `inicio + (fin - inicio) * t`, con `t = 0` queda el color inicial, con `t = 1` el inicio se cancela y queda el final, y con valores intermedios sale una mezcla proporcional. Por ejemplo, con `t = 0.5` obtengo el punto medio.
 
 ## Comparación final
+1. ¿Qué coincidió con tu predicción?
+Coincidió que el degradado entre Azul turquesa oscuro y Verde oscuro se mantiene oscuro todo el trayecto y sube levemente de brillo hacia el verde. También coincidió que el fondo blanco hace ver más claro el color transparente.
+
+2. ¿Qué color o paso cambió más de lo esperado?
+Esperaba que el degradado entre Azul turquesa oscuro y Verde oscuro no cambiara mucho, porque los dos son colores oscuros. Lo que vi fue que el cambio sí se nota un poco, llas primeras muestras son casi grises azuladas y las últimas ya se ven claramente verdes, aunque todas siguen siendo oscuras.
+
+3. ¿La conversión hexadecimal coincidió?
+Sí. Convertí a mano 30, 38 y 39 a 1E, 26 y 27, y el programa mostró #1E2627 para Azul turquesa oscuro.
+
+4. ¿Cómo influyó el fondo en la transparencia?
+Con alpha 120, el color A se ve distinto según el fondo aunque sus valores RGB no cambian, sobre blanco se ve muy claro y casi se funde con el fondo, y sobre el oscuro se ve gris o casi negro.
+
+Explicación breve:
+El color es una mezcla de rojo, verde y azul de 0 a 255. En el degradado, cada canal se interpola por separado con inicio + (fin - inicio) * t, y t va de 0 a 1 en pasos iguales. Con alpha 120, el color final mezcla aproximadamente 47% del color con 53% del fondo, por eso cambia el resultado visible.
