@@ -1,5 +1,4 @@
 # Bitacora de ColorLab
-
 ## Predicción inicial
 Al intentar predecir el degradado entre Azul Oscuro y Verde Oscuro, puedo suponer que los tonos mostrados se mantendran oscuros, incrementando levemente su brillo mientras mas va moviendose a verde.
 Tambien, un fondo blanco hara los colores mas claros al transparentarse con los colores.
@@ -32,6 +31,12 @@ Cada paso se dibuja como un cuadro (colorMuestra) en una fila debajo del lienzo,
 Paso 9: Ajuste del lienzo
 Se cambió el lienzo a Rectangle(300, 20, 528, 400). Como el ancho es múltiplo de 8, la fila del degradado mide lo mismo que el lienzo.
 
+Paso 10: RGB de cada muestra
+Se agregó debajo de cada valor de t el RGB de esa muestra, calculado con la interpolación de cada canal.El primer cuadro (t = 0.00) muestra el RGB del color A y el último (t = 1.00) el del color B.
+
+Paso 12: Alpha 120 sobre dos fondos
+Se dibujaron un fondo blanco y uno oscuro, y encima de cada uno un cuadro más pequeño con el color A con alpha 120.
+
 ## Errores y Correccines: Sesión 03 · Color Lab
 - Objetivo del cambio: elegir el color B con clic derecho sin que sea igual a A, y generar los 8 pasos del degradado.
 - Comando o prueba ejecutada: revisión del código antes de correr dotnet run.
@@ -39,7 +44,7 @@ Se cambió el lienzo a Rectangle(300, 20, 528, 400). Como el ancho es múltiplo 
   - `if i =! j {indiceColorB = j;}`
   - `for (int i = 0; i =< 7; i++;) {double t = i/(double)(8-1)}`
 - Mi hipótesis antes de pedir ayuda: pensé que j pdoria funcionar bien como una segunda variable como i y que se podía comparar contra ella.
-- Causa identificada: j no tenia un valor valido o util, solo hay un ciclo y su variable es i. Además `=!` no es un operador en C# (es `!=`), `=<` tampoco (es `<=`), faltaban los paréntesis del if, sobraba un `;` en el for y faltaba el `;` al final de la instrucción, cosas que habia olviado por la falta de practica o simplemente se me escaparon.
+- Causa identificada: j no tenia un valor valido o util, solo hay un ciclo y su variable es i. Además `=!` no es un operador en C# (es `!=`), `=<` tampoco (es `<=`), faltaban los paréntesis del if, sobraba un `;` en el for y faltaba el `;` al final de la instrucción, cosas que habia olviado por la falta de practica o simplemente se me escaparon por el cansancio.
 - Cambio aplicado: comparar i contra indiceColorA, usar `!=` y `<=`, poner los paréntesis y corregir los `;`.
 - Resultado de la prueba: el código compila y el degradado se dibuja con t de 0.00 a 1.00.
 - Ayuda utilizada, si la hubo: Claude me señaló cada error que cometi y me guio como si fuera mi tutor para corregirlos.
@@ -48,10 +53,4 @@ Se cambió el lienzo a Rectangle(300, 20, 528, 400). Como el ancho es múltiplo 
   - `i` es la posición de la tarjeta que el `for` revisa en cada vuelta. Solo cambia `indiceColorA` o `indiceColorB` cuando hago clic en esa tarjeta, y la condición `i != indiceColorA` evita que B sea igual a A.
   - En `inicio + (fin - inicio) * t`, con `t = 0` queda el color inicial, con `t = 1` el inicio se cancela y queda el final, y con valores intermedios sale una mezcla proporcional. Por ejemplo, con `t = 0.5` obtengo el punto medio.
 
-## Pendiente
-- Cálculo manual de un paso del degradado
-- Alpha sobre dos fondos
-- Comparación final
-
 ## Comparación final
-(lo dejare vacío por ahora)
