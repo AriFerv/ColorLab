@@ -103,8 +103,8 @@ internal static class Programa
             byte alphaValor = 120;
             Color colorSemitransparente = new Color(colorA.R, colorA.G, colorA.B, alphaValor);
 
-            Rectangle fondoBlanco = new Rectangle(10, 400, 130, 100);
-            Rectangle fondoOscuro = new Rectangle(150, 400, 130, 100);
+            Rectangle fondoBlanco = new Rectangle(10, 448, 130, 100);
+            Rectangle fondoOscuro = new Rectangle(150, 448, 130, 100);
 
             Raylib.DrawRectangleRec(fondoBlanco, Color.White);
             Raylib.DrawRectangleLinesEx(fondoBlanco, 1, Color.LightGray);
@@ -113,9 +113,15 @@ internal static class Programa
             Raylib.DrawRectangle((int)fondoBlanco.X + 20, (int)fondoBlanco.Y + 20, 90, 60, colorSemitransparente);
             Raylib.DrawRectangle((int)fondoOscuro.X + 20, (int)fondoOscuro.Y + 20, 90, 60, colorSemitransparente);
 
-            Raylib.DrawText($"Alpha {alphaValor} sobre dos fondos", 10, 375, 14, Color.Black);
-            Raylib.DrawText("Fondo blanco", 10, 505, 14, Color.DarkGray);
-            Raylib.DrawText("Fondo oscuro", 150, 505, 14, Color.DarkGray);
+            Raylib.DrawText($"Alpha {alphaValor} sobre dos fondos", 10, 428, 14, Color.Black);
+            Raylib.DrawText("Fondo blanco", 10, 553, 14, Color.DarkGray);
+            Raylib.DrawText("Fondo oscuro", 150, 553, 14, Color.DarkGray);
+
+            //como van a saber como se usa equisde
+            Raylib.DrawText("Clic izq. en tarjeta: color A (pinta)", 10, 362, 11, Color.DarkGray);
+            Raylib.DrawText("Clic der. en tarjeta: color B (degradado)", 10, 376, 11, Color.DarkGray);
+            Raylib.DrawText("Clic izq. en lienzo: pinta con A", 10, 390, 11, Color.DarkGray);
+            Raylib.DrawText("Tecla C: limpia el lienzo", 10, 404, 11, Color.DarkGray);
 
             Raylib.EndDrawing();
         }
